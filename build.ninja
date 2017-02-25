@@ -1,0 +1,21 @@
+utilDir = src/derek/util/*.java
+graphDir = src/derek/util/graph/*.java
+testUtil = test/derek/util/*.java
+testGraph = test/derek/util/graph/*.java
+output = bin
+classpath = lib/hamcrest-core-1.3.jar:lib/junit-4.12.jar:bin:.
+javacArgs = -d $output -cp $classpath
+javaSrc = $utilDir $graphDir
+javaTests = $testUtil $testGraph
+testArgs = all
+
+rule javac
+    command = javac $javacArgs $javaSrc $javaTests
+rule runtests
+    command = java -cp $classpath TestRunner all
+rule buildTestRunner
+    command = javac -cp $classpath TestRunner.java
+
+build make: javac
+build tests: runtests
+build makeTestRunner: buildTestRunner
