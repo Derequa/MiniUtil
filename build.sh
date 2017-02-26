@@ -9,4 +9,6 @@ echo "Building TestRunner..."
 ninja makeTestRunner
 echo "Running tests..."
 ninja tests
+echo "Generating Documentation..."
+javadoc -sourcepath src derek.util -d doc
 echo "Done!"

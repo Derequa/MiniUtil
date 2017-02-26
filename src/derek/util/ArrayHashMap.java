@@ -8,6 +8,14 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * This class implements a hash-map using only arrays. No linked lists at all.
+ * Chanllenging thing is challenging.
+ * This also extends AbstractMap and uses generic types, so that its not a
+ * complete waste of code.
+ * 
+ * @author Derek Batts <dsbatts@ncsu.edu>
+ */
 public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 
 	/** The default number of buckets, if no number is given. */
@@ -19,6 +27,7 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 	private float loadFactor;
 	/** The number of buckets to start out with. */
 	private int initialCapacity;
+
 	/**
 	 * The 3D array of Objects used to map.
 	 * The outer array contains the "buckets". A bucket is a 2D array or a "list of arrays". 
@@ -100,7 +109,9 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 
 
 	/**
-	 * 
+	 * This method checks if the given key exists in the HashMap.
+	 * @param key The key to look for.
+	 * @return True if the key exists, false if not.
 	 */
 	@Override
 	public boolean containsKey(Object key) {
@@ -127,7 +138,11 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 	}
 	
 
-	
+	/**
+	 * This method checks if a given value exists in this HashMap.
+	 * @param value The value to look for.
+	 * @return True if the value exists in teh map, false if not.
+	 */
 	@Override
 	public boolean containsValue(Object value) {
 		// Look through the buckets
@@ -152,7 +167,10 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 
 
 
-
+	/**
+	 * This method will create and return an entry set of all the key-value pairs in this HashMap.
+	 * @return An entry set of all the key-value pairss in this HashMap.
+	 */
 	@Override
 	public Set<Map.Entry<K, V>> entrySet() {
 		// Create and empty set
@@ -168,7 +186,11 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 
 
 
-
+	/**
+	 * This metod will get the value at the given key in the map.
+	 * @param key The key for the value we are looking for.
+	 * @return The value associated with the given key or null if the key doesn't exist in the map.
+	 */
 	@Override
 	public V get(Object key) {
 		// Generate an index for the array of buckets using the key's hashcode
@@ -195,7 +217,10 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 
 
 
-
+	/**
+	 * This method checks if the map is empty.
+	 * @return True if the map is empty, false if not.
+	 */
 	@Override
 	public boolean isEmpty() {
 		return size == 0;
@@ -203,7 +228,10 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 
 
 
-
+	/**
+	 * This method creates and returns a set of all the keys in this HashMap.
+	 * @return A new set of all the keys in this map.
+	 */
 	@Override
 	public Set<K> keySet() {
 		Set<K> set  = new HashSet<K>();
@@ -224,7 +252,13 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 
 
 
-
+	/**
+	 * This method will store the given key-value pair in this HashMap. If the key already
+	 * exists in the map, the new value will be stored and associated with the given key.
+	 * @param key The key to store this value with.
+	 * @param value The value to store.
+	 * @return V The value that was stored.
+	 */
 	@Override
 	public V put(K key, V value) {
 		// Generate an index for the array of buckets using the key's hashcode
@@ -270,8 +304,10 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 	}
 
 
-
-
+	/**
+	 * This is a helper method to grow the number of buckets this HashMap is using.
+	 * It will grow them by doubling the number of buckets present.
+	 */
 	private void growBuckets() {
 		// A counter for the number of buckets that are at least half-full
 		int numHalfFull = 0;
@@ -301,7 +337,10 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 	}
 	
 	
-	
+	/**
+	 * This is a helper method to shift all the elements in a bucket to remove and gaps there may be.
+	 * @param bucket The bucket to work on.
+	 */
 	private void shiftBucket(Object[][] bucket) {
 		// Look through the buckets list of arrays for gaps
 		for (int i = 0 ; i < bucket.length ; i++) {
@@ -317,7 +356,10 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 
 
 
-
+	/**
+	 * This method will store all the key value pairs from a given map into this HashMap.
+	 * @param m The map to copy key-value pairs from.
+	 */
 	@Override
 	public void putAll(Map m) {
 		for (Object key : m.keySet()) {
@@ -328,7 +370,12 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 
 
 
-
+	/**
+	 * This method will remove the key-value pair from the map and return the value
+	 * that was stored if any.
+	 * @param key The key to remove and whose value to remove.
+	 * @return The value at the given key, or null if there is no such key.
+	 */
 	@Override
 	public V remove(Object key) {
 		// Generate an index for the array of buckets using the key's hashcode
@@ -361,7 +408,10 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 
 
 
-
+	/**
+	 * This gets the number of key-value pairs currently stored in this map.
+	 * @return The number of pairs stored.
+	 */
 	@Override
 	public int size() {
 		return size;
@@ -369,7 +419,10 @@ public class ArrayHashMap<K, V> extends AbstractMap<K, V> {
 
 
 
-
+	/**
+	 * This will create and return a list of all the values stored in this map.
+	 * @return A new list of all the values in this map.
+	 */
 	@Override
 	public Collection<V> values() {
 		Collection<V> list  = new LinkedList<V>();
