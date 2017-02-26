@@ -10,5 +10,5 @@ ninja makeTestRunner
 echo "Running tests..."
 ninja tests
 echo "Generating Documentation..."
-javadoc -sourcepath src derek.util -d doc
+javadoc -d doc -sourcepath src -subpackages derek.util:derek.util.graph
 echo "Done!"
