@@ -10,9 +10,9 @@ ninja makeTestRunner
 echo "Running tests..."
 ninja tests
 echo "Generating Documentation..."
-if [ ! -d ./doc ]; then
-    echo "Creating doc directory..."
-    mkdir doc
+if [ ! -d ./docs ]; then
+    echo "Creating docs directory..."
+    mkdir docs
 fi
-javadoc -d doc -sourcepath src -subpackages derek.util:derek.util.graph
+javadoc -d docs -sourcepath src -subpackages derek.util:derek.util.graph
 echo "Done!"
