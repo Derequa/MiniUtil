@@ -66,6 +66,10 @@ public class AVLTree<T extends Comparable<T>> {
 		}
 	}
 	
+	/**
+	 * Returns the number of elements stored in this tree.
+	 * @return The number of elements in this tree.
+	 */
 	public int size() {
 		return size;
 	}
